@@ -18,6 +18,7 @@ const staticStyles = {
   backgroundColor: DEFAULT_BONE_COLOR,
 };
 
+const AnimatedView = Animated.View as React.ComponentType<any>;
 describe('SkeletonComponent test suite', () => {
   it('should render empty alone', () => {
     const tree = create(<SkeletonContent isLoading={false} />).toJSON();
@@ -45,7 +46,7 @@ describe('SkeletonComponent test suite', () => {
     };
     const instance = create(<SkeletonContent {...props} />);
     const component = instance.root;
-    const bones = component.findAllByType(Animated.View);
+    const bones = component.findAllByType(AnimatedView);
 
     // two bones and parent component
     expect(bones.length).toEqual(layout.length + 1);
@@ -89,7 +90,7 @@ describe('SkeletonComponent test suite', () => {
     let bones = component.findAllByType(LinearGradient);
     expect(bones.length).toEqual(children.length);
     // finding styles of wrapper views
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
       ...w1,
@@ -106,7 +107,7 @@ describe('SkeletonComponent test suite', () => {
     // re-update with pulse animation
     instance.update(<TestComponent isLoading animationType="pulse" />);
     component = instance.root;
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
     // cannot test interpolated background color
     expect(bones[1].props.style).toEqual([
       {
@@ -151,7 +152,7 @@ describe('SkeletonComponent test suite', () => {
     let bones = component.findAllByType(LinearGradient);
     // one animated view child for each bone + parent
     expect(bones.length).toEqual(layout.length);
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
       ...w1,
@@ -187,7 +188,7 @@ describe('SkeletonComponent test suite', () => {
 
     bones = instance.root.findAllByType(LinearGradient);
     expect(bones.length).toEqual(layout.length);
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
       ...w1,
@@ -238,7 +239,7 @@ describe('SkeletonComponent test suite', () => {
     let bones = component.findAllByType(LinearGradient);
     // three overall bones
     expect(bones.length).toEqual(3);
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
 
     expect(bones[1].props.style).toEqual({
       flexDirection: 'row',
@@ -293,7 +294,7 @@ describe('SkeletonComponent test suite', () => {
 
     expect(bones.length).toEqual(layout.length);
     // get parent
-    bones = component.findAllByType(Animated.View);
+    bones = component.findAllByType(AnimatedView);
     // testing that styles of childs corresponds to percentages
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
