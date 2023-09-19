@@ -18,7 +18,7 @@ const staticStyles = {
   backgroundColor: DEFAULT_BONE_COLOR,
 };
 
-const AnimatedView = Animated.View as React.ComponentType<any>;
+const AnimatedView = Animated.View as React.ElementType<any>;
 describe('SkeletonComponent test suite', () => {
   it('should render empty alone', () => {
     const tree = create(<SkeletonContent isLoading={false} />).toJSON();
